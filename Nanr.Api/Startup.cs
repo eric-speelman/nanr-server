@@ -47,8 +47,7 @@ namespace Nanr.Api
                 {
                     config.AllowAnyHeader();
                     config.AllowAnyMethod();
-                    config.WithOrigins("http://localhost:4200");
-                    app.UseDeveloperExceptionPage();
+                    config.WithOrigins("*")
                 });
             }
             else
@@ -60,8 +59,7 @@ namespace Nanr.Api
             {
                 config.AllowAnyHeader();
                 config.AllowAnyMethod();
-                config.WithOrigins("http://localhost:4200");
-                app.UseDeveloperExceptionPage();
+                config.WithOrigins("*");
             });
             app.UseStaticFiles();
             app.UseRouting();
