@@ -48,14 +48,14 @@ namespace Nanr.Api
                     config.AllowAnyHeader();
                     config.AllowAnyMethod();
                     config.WithOrigins("http://localhost:4200");
+                    app.UseDeveloperExceptionPage();
                 });
             }
             else
             {
-                //app.UseHsts();
-                //app.UseHttpsRedirection();
+                app.UseHsts();
+                app.UseHttpsRedirection();
             }
-            app.UseDeveloperExceptionPage();
             app.UseStaticFiles();
             app.UseRouting();
             app.UseEndpoints(endpoints =>
