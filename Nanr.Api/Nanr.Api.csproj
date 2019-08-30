@@ -34,4 +34,8 @@
     <ProjectReference Include="..\Nanr.Data\Nanr.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\" />
+  </ItemGroup>
+
 </Project>

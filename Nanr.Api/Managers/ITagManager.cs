@@ -1,4 +1,5 @@
-﻿using Nanr.Data.Models;
+﻿using Nanr.Api.Models;
+using Nanr.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,6 @@ namespace Nanr.Api.Managers
 {
     public interface ITagManager
     {
-        Task<IEnumerable<Tag>> GetTags(User user);
+        Task View(TagViewModel model);
     }
 }

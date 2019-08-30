@@ -15,12 +15,13 @@ namespace Nanr.Api.Controllers
             this.tagManager = tagManager;
         }
 
-        [HttpGet]
-        [Route("api/tags")]
-        public async Task<IEnumerable<TagModel>> GetTags()
+        [HttpPost]
+        [Route("api/tags/view")]
+        [AllowAnonymous]
+        public async Task<ActionResult> TagView([FromBody]TagViewModel tagViewModel) 
         {
-            return (await tagManager.GetTags(NanrUser!))
-                .Select(x => new TagModel(x));
+            await tagManager.View(tagViewModel);
+            return Ok();
         }
 
     private readonly ITagManager tagManager;

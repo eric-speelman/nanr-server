@@ -85,14 +85,38 @@ namespace Nanr.Data.Migrations
                         {
                             Id = new Guid("c748c8e3-da3f-4151-9e0d-190d1923c5ac"),
                             IsDefault = true,
-                            UserId = new Guid("91b44665-e0a8-418d-9344-175ff2404025")
+                            UserId = new Guid("8352b38f-7be1-4497-8b66-e9776d2ab8f1")
                         },
                         new
                         {
-                            Id = new Guid("7fa3c34f-8488-471d-b293-7dd43c977396"),
+                            Id = new Guid("fa81e3d2-5741-46ab-875e-5e6a14870eb0"),
                             IsDefault = true,
-                            UserId = new Guid("8352b38f-7be1-4497-8b66-e9776d2ab8f1")
+                            UserId = new Guid("74ef2b08-6b90-46c0-bd52-2acf81f35186")
                         });
+                });
+
+            modelBuilder.Entity("Nanr.Data.Models.TagView", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Page")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("TagId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TagId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("TagViews");
                 });
 
             modelBuilder.Entity("Nanr.Data.Models.User", b =>
@@ -136,7 +160,7 @@ namespace Nanr.Data.Migrations
                         {
                             Id = new Guid("8352b38f-7be1-4497-8b66-e9776d2ab8f1"),
                             Balance = 20,
-                            CreatedOn = new DateTime(2019, 8, 27, 21, 24, 14, 160, DateTimeKind.Utc).AddTicks(7766),
+                            CreatedOn = new DateTime(2019, 8, 30, 21, 52, 12, 219, DateTimeKind.Utc).AddTicks(6259),
                             Email = "eric.t.speelman@gmail.com",
                             PasswordHash = "2jAJXn2ZLlH3oewf9tAb0Sl6ushDB0unLNqsRv3TBcw=",
                             Salt = "RfJSCsZNibfFN7+d19Cy8A==",
@@ -144,13 +168,13 @@ namespace Nanr.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("91b44665-e0a8-418d-9344-175ff2404025"),
+                            Id = new Guid("74ef2b08-6b90-46c0-bd52-2acf81f35186"),
                             Balance = 20,
-                            CreatedOn = new DateTime(2019, 8, 27, 21, 24, 14, 160, DateTimeKind.Utc).AddTicks(8727),
-                            Email = "test@gmail.com",
+                            CreatedOn = new DateTime(2019, 8, 30, 21, 52, 12, 219, DateTimeKind.Utc).AddTicks(7224),
+                            Email = "test@fake.com",
                             PasswordHash = "2jAJXn2ZLlH3oewf9tAb0Sl6ushDB0unLNqsRv3TBcw=",
                             Salt = "RfJSCsZNibfFN7+d19Cy8A==",
-                            Username = "Password"
+                            Username = "test"
                         });
                 });
 
@@ -173,7 +197,7 @@ namespace Nanr.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("UsdAmount")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(10, 2)");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
@@ -216,6 +240,19 @@ namespace Nanr.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Nanr.Data.Models.TagView", b =>
+                {
+                    b.HasOne("Nanr.Data.Models.Tag", "Tag")
+                        .WithMany()
+                        .HasForeignKey("TagId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Nanr.Data.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Nanr.Data.Models.Withdraw", b =>

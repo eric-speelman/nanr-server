@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Nanr.Api.Models;
 using Nanr.Data;
 using Nanr.Data.Models;
 using System;
@@ -14,10 +16,23 @@ namespace Nanr.Api.Managers
         {
             this.context = context;
         }
-
-        public async Task<IEnumerable<Tag>> GetTags(User user)
+        [HttpPost]
+        public async Task View(TagViewModel model)
         {
-            return await context.Tags.Where(x => x.UserId == user.Id).ToListAsync();
+            Guid? userId = null;
+            if(model.SessionId != null)
+            {
+                userId = await context.Sessions.Where(x => x.Id == model.SessionId).Select(x => x.UserId).SingleOrDefaultAsync();
+            }
+            var tagView = new TagView
+            {
+                Id = Guid.NewGuid(),
+                TagId = model.TagId,
+                Page = model.Page,
+                UserId = userId
+            };
+            context.TagViews.Add(tagView);
+            await context.SaveChangesAsync();
         }
 
         private readonly NanrDbContext context;

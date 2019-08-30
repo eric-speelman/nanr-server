@@ -15,14 +15,30 @@ namespace Nanr.Data
         {
             builder.Entity<User>().HasIndex(x => x.Email);
             builder.Entity<Click>().HasOne(x => x.User).WithMany(x => x.Clicks).OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<Withdraw>()
+            .Property(x => x.UsdAmount)
+            .HasColumnType("decimal(10, 2)");
             var userId = Guid.Parse("8352b38f-7be1-4497-8b66-e9776d2ab8f1");
             var tagId = Guid.Parse("c748c8e3-da3f-4151-9e0d-190d1923c5ac");
+            var testUserId = Guid.Parse("74ef2b08-6b90-46c0-bd52-2acf81f35186");
+            var testTagId = Guid.Parse("fa81e3d2-5741-46ab-875e-5e6a14870eb0");
             builder.Entity<User>().HasData(
                 new User
                 {
                     Id = userId,
                     Email = "eric.t.speelman@gmail.com",
                     Username = "Eric",
+                    Salt = "RfJSCsZNibfFN7+d19Cy8A==",
+                    Balance = 20,
+                    PasswordHash = "2jAJXn2ZLlH3oewf9tAb0Sl6ushDB0unLNqsRv3TBcw=",
+                    CreatedOn = DateTime.UtcNow,
+                    LastLogin = null,
+                },
+                new User
+                {
+                    Id = testUserId,
+                    Email = "test@fake.com",
+                    Username = "test",
                     Salt = "RfJSCsZNibfFN7+d19Cy8A==",
                     Balance = 20,
                     PasswordHash = "2jAJXn2ZLlH3oewf9tAb0Sl6ushDB0unLNqsRv3TBcw=",
@@ -36,7 +52,13 @@ namespace Nanr.Data
                     Id = tagId,
                     UserId = userId,
                     IsDefault = true
-                }); ;
+                },
+                new Tag
+                {
+                    Id = testTagId,
+                    UserId = testUserId,
+                    IsDefault = true
+                });
         }
 
         public DbSet<User> Users { get; set; }
@@ -44,5 +66,6 @@ namespace Nanr.Data
         public DbSet<Tag> Tags { get; set; }
         public DbSet<Click> Clicks { get; set; }
         public DbSet<Withdraw> Withdraws { get; set; }
+        public DbSet<TagView> TagViews { get; set; }
     }
 }
