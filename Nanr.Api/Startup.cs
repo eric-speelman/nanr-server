@@ -47,7 +47,7 @@ namespace Nanr.Api
                 {
                     config.AllowAnyHeader();
                     config.AllowAnyMethod();
-                    config.WithOrigins("*")
+                    config.WithOrigins("*");
                 });
             }
             else
