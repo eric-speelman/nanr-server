@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Tag Test</title>
+    <style>
+        body {
+            background-color: #ffaaaa;
+        }
+    </style>
+    <script src="http://localhost:4200/assets/tags/nanr.js"></script>
+</head>
+<body>
+    <h1>Tag Test</h1>
+    <div>Above</div>
+    <div nanr-id="c748c8e3-da3f-4151-9e0d-190d1923c5ac"></div>
+    <div>Below</div>
+    <button onclick="test()">Test</button>
+    <script>
+        function test() {
+            document.querySelectorAll('iframe').forEach(el => {
+                el.click();
+            })
+        }
+    </script>
+</body>
+</html>

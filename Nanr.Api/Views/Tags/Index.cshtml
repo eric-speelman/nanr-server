@@ -1,0 +1,91 @@
+﻿<html>
+<head></head>
+<body>
+    <div id="tag">
+        <img src="/img/banana.svg" width="60" height="40" id="default-img" />
+        <img src="/img/banana-peeling.svg" width="60" height="40" class="hidden" id="loading-img" />
+        <img src="/img/monkey.svg" width="60" height="40" class="hidden" id="success-img" />
+    </div>
+
+    <style>
+        body {
+            margin: 0px;
+        }
+        #tag {
+            cursor: pointer;
+            height: 40px;
+            width: 60px;
+            background-color: #fff;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        #tag:hover {
+            background-color: #ddd;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+
+    <script>
+        let tagId = window.location.pathname.split('/')[2];
+        document.getElementById('tag').onclick = () => {
+            if (!tagId) {
+                jsError('Tag id not found');
+            }
+            var sessionId = window.localStorage.getItem('session');
+            console.log(sessionId);
+            if (!sessionId) {
+                login();
+                return;
+            }
+            document.getElementById('default-img').classList.add('hidden');
+            document.getElementById('loading-img').classList.remove('hidden');
+            fetch('/api/click', {
+                method: 'POST',
+                mode: 'same-origin',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'bearer ' + sessionId
+                },
+                body: JSON.stringify({ tagId })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        document.getElementById('loading-img').classList.add('hidden');
+                        document.getElementById('success-img').classList.remove('hidden');
+                        setTimeout(() => {
+                            document.getElementById('success-img').classList.add('hidden');
+                            document.getElementById('default-img').classList.remove('hidden');
+                        }, 2000)
+                    } else {
+                        if (!data.errors || data.errors.length === 0) {
+                            jsError('Unexpcted error response');
+                        }
+                        data.errors = data.errors.map(err => err.toLowerCase());
+                        if (data.errors.filter(err => err.indexOf('session') >= 0).length >= 0) {
+                            login();
+                        }
+                    }
+                });
+        };
+
+        function jsError(err) {
+            console.log(err);
+        }
+
+        function login() {
+            var msg = {
+                type: 'showLogin',
+                tagId
+            };
+            window.parent.postMessage(JSON.stringify(msg), '*');
+            document.getElementById('loading-img').classList.add('hidden');
+            document.getElementById('default-img').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
