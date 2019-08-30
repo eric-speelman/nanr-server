@@ -56,6 +56,13 @@ namespace Nanr.Api
                 app.UseHsts();
                 app.UseHttpsRedirection();
             }
+            app.UseCors(config =>
+            {
+                config.AllowAnyHeader();
+                config.AllowAnyMethod();
+                config.WithOrigins("http://localhost:4200");
+                app.UseDeveloperExceptionPage();
+            });
             app.UseStaticFiles();
             app.UseRouting();
             app.UseEndpoints(endpoints =>
