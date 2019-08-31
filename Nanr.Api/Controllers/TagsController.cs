@@ -2,6 +2,7 @@
 using Nanr.Api.Filters;
 using Nanr.Api.Managers;
 using Nanr.Api.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,6 +14,13 @@ namespace Nanr.Api.Controllers
         public TagsController(ITagManager tagManager)
         {
             this.tagManager = tagManager;
+        }
+
+        [HttpGet]
+        [Route("api/tag")]
+        public async Task<TagModel> GetTag()
+        {
+            return new TagModel(await tagManager.GetDefaultTag(NanrUser!), NanrUser!);
         }
 
         [HttpPost]

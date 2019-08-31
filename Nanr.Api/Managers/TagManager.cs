@@ -35,6 +35,11 @@ namespace Nanr.Api.Managers
             await context.SaveChangesAsync();
         }
 
+        public async Task<Tag> GetDefaultTag(User user)
+        {
+            return await context.Tags.Where(x => x.UserId == user.Id && x.IsDefault).SingleAsync();
+        }
+
         private readonly NanrDbContext context;
     }
 }
