@@ -54,13 +54,13 @@ namespace Nanr.Api
             {
                 app.UseHsts();
                 app.UseHttpsRedirection();
+                app.UseCors(config =>
+                {
+                    config.AllowAnyHeader();
+                    config.AllowAnyMethod();
+                    config.WithOrigins("*.nanr.io");
+                });
             }
-            app.UseCors(config =>
-            {
-                config.AllowAnyHeader();
-                config.AllowAnyMethod();
-                config.WithOrigins("*");
-            });
             app.UseStaticFiles();
             app.UseRouting();
             app.UseEndpoints(endpoints =>
