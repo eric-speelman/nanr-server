@@ -24,7 +24,7 @@ namespace Nanr.Api.Controllers
             var clicksSent = await transactionManager.GetClickTransactionsSent(NanrUser!);
             var clicksRecieved = await transactionManager.GetClickTransactionsRecieved(NanrUser!);
             var withdraws = await transactionManager.GetWithdrawTransaction(NanrUser!);
-            return new TransactionResponseModel(clicksSent, clicksRecieved, withdraws);
+            return new TransactionResponseModel(clicksRecieved, clicksSent, withdraws);
         }
 
         private readonly ITransactionManager transactionManager;
