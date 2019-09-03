@@ -7,8 +7,7 @@ namespace Nanr.Api.Models
 {
     public class ClickModel
     {
-        public Guid? TagId { get; set; }
-        public string? Username { get; set; }
+        public string? TagId { get; set; }
         public string? Page { get; set; }
     }
 }

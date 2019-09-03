@@ -17,27 +17,29 @@ namespace Nanr.Api.Managers
             this.purchaseManager = purchaseManager;
         }
 
-        public async Task<IEnumerable<string>> Click(Guid userId, Guid? tagId, string? username, string? page)
+        public async Task<IEnumerable<string>> Click(Guid userId, string tagId, string? page)
         {
             var errors = new List<string>();
             using var transaction = context.Database.BeginTransaction(IsolationLevel.RepeatableRead);
             var now = DateTime.UtcNow;
             Tag? tag = null;
-            if (tagId != null)
+            if (Guid.TryParse(tagId, out Guid tagGuid))
             {
-                tag = await context.Tags.Include(x => x.User).SingleOrDefaultAsync(x => x.Id == tagId);
+
+                tag = await context.Tags.Include(x => x.User).SingleOrDefaultAsync(x => x.Id == tagGuid);
                 if (tag == null)
                 {
                     errors.Add(InvalidTagIdError);
                 }
-            } else if(username != null)
+            } else
             {
-                tag = await context.Tags.Include(x => x.User).SingleOrDefaultAsync(x => x.User.Username == username);
+                tag = await context.Tags.Include(x => x.User).SingleOrDefaultAsync(x => x.User.Username == tagId);
                 if(tag == null)
                 {
                     errors.Add(InvlaidUsernameError);
                 }
-            } else
+            }
+            if(tag == null)
             {
                 errors.Add(NoUsernameOrTagId);
             }

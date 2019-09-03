@@ -7,6 +7,6 @@ namespace Nanr.Api.Managers
 {
     public interface IClickManager
     {
-        Task<IEnumerable<string>> Click(Guid userId, Guid? tagId, string? username, string? page);
+        Task<IEnumerable<string>> Click(Guid userId, string tagId, string? page);
     }
 }

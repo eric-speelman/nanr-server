@@ -24,10 +24,15 @@ namespace Nanr.Api.Managers
             {
                 userId = await context.Sessions.Where(x => x.Id == model.SessionId).Select(x => x.UserId).SingleOrDefaultAsync();
             }
+            Guid tagGuid;
+            if(!Guid.TryParse(model.TagId, out tagGuid))
+            {
+                tagGuid = await context.Tags.Where(x => x.IsDefault && x.User.Username == model.TagId).Select(x => x.Id).SingleOrDefaultAsync();
+            }
             var tagView = new TagView
             {
                 Id = Guid.NewGuid(),
-                TagId = model.TagId,
+                TagId = tagGuid,
                 Page = model.Page,
                 UserId = userId
             };
