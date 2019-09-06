@@ -35,6 +35,7 @@ namespace Nanr.Api
             });
             services.AddScoped<ITransactionManager, TransactionManager>();
             services.AddScoped<ITagManager, TagManager>();
+            services.AddScoped<IContactManager, ContactManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

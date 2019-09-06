@@ -67,5 +67,6 @@ namespace Nanr.Data
         public DbSet<Click> Clicks { get; set; }
         public DbSet<Withdraw> Withdraws { get; set; }
         public DbSet<TagView> TagViews { get; set; }
+        public DbSet<Contact> Contacts { get; set; }
     }
 }
