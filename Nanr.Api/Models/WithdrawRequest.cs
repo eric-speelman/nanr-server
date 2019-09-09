@@ -8,5 +8,6 @@ namespace Nanr.Api.Models
     public class WithdrawRequestModel
     {
         public int Amount { get; set; }
+        public string? Email { get; set; }
     }
 }

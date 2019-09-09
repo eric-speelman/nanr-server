@@ -47,7 +47,7 @@ namespace Nanr.Api.Managers
             }
         }
 
-        public async Task<string?> Withdraw(int amount, User user)
+        public async Task<string?> Withdraw(int amount, string email, User user)
         {
             if(amount < 2)
             {
@@ -68,7 +68,8 @@ namespace Nanr.Api.Managers
                 CreatedOn = DateTime.UtcNow,
                 TransactionFee = 1,
                 UserId = user.Id,
-                Status = 1
+                Status = 1,
+                Email = email
             };
             withdraw.UsdAmount = (amount - 1) * (decimal)0.2;
             context.Withdraws.Add(withdraw);

@@ -28,7 +28,7 @@ namespace Nanr.Api.Controllers
         [HttpPost]
         public async Task<WithdrawResponseModel> Withdraw([FromBody]WithdrawRequestModel withdrawRequest)
         {
-            var err = await purchaseManager.Withdraw(withdrawRequest.Amount, NanrUser!);
+            var err = await purchaseManager.Withdraw(withdrawRequest.Amount, withdrawRequest.Email!, NanrUser!);
             if(err == null)
             {
                 return new WithdrawResponseModel
