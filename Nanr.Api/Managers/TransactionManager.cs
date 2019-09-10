@@ -47,6 +47,16 @@ namespace Nanr.Api.Managers
             });
         }
 
+        public async Task<(int sent, int recieved)> RecentTransactionCount(User user, int length)
+        {
+            var start = DateTime.UtcNow;
+            var end = start.AddDays(-length);
+            var rangeQuery = context.Clicks.Where(x => x.Timestamp >= end && x.Timestamp <= start);
+            var sent = await rangeQuery.Where(x => x.UserId == user.Id).CountAsync();
+            var recieved = await rangeQuery.Where(x => x.Tag.UserId == user.Id).CountAsync();
+            return (sent, recieved);
+        }
+
         private readonly NanrDbContext context;
     }
 }
