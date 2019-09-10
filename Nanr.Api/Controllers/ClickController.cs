@@ -19,7 +19,7 @@ namespace Nanr.Api.Controllers
         {
             this.clickManager = clickManager;
         }
-        [AllowAnonymous]
+
         [HttpPost]
         public async Task<ClickResponseModel> Click(ClickModel clickModel)
         {
