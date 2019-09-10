@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Nanr.Api.Filters;
 using Nanr.Api.Managers;
 using Nanr.Api.Managers.Models;
 using Nanr.Api.Models;
