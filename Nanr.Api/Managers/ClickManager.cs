@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Nanr.Api.Models;
 using Nanr.Data;
 using Nanr.Data.Models;
 using System;
@@ -17,13 +18,14 @@ namespace Nanr.Api.Managers
             this.purchaseManager = purchaseManager;
         }
 
-        public async Task<IEnumerable<string>> Click(Guid userId, string tagId, string? page)
+        public async Task<ClickResponseModel> Click(ClickModel clickModel, Guid userId)
         {
             var errors = new List<string>();
+            var response = new ClickResponseModel(errors);
             using var transaction = context.Database.BeginTransaction(IsolationLevel.RepeatableRead);
             var now = DateTime.UtcNow;
             Tag? tag = null;
-            if (Guid.TryParse(tagId, out Guid tagGuid))
+            if (Guid.TryParse(clickModel.TagId, out Guid tagGuid))
             {
 
                 tag = await context.Tags.Include(x => x.User).SingleOrDefaultAsync(x => x.Id == tagGuid);
@@ -33,7 +35,7 @@ namespace Nanr.Api.Managers
                 }
             } else
             {
-                tag = await context.Tags.Include(x => x.User).SingleOrDefaultAsync(x => x.User.Username == tagId);
+                tag = await context.Tags.Include(x => x.User).SingleOrDefaultAsync(x => x.User.Username == clickModel.TagId);
                 if(tag == null)
                 {
                     errors.Add(InvlaidUsernameError);
@@ -51,7 +53,7 @@ namespace Nanr.Api.Managers
             if(errors.Any())
             {
                 await transaction.RollbackAsync();
-                return errors;
+                return response;
             }
             user.Balance -= 1;
             tag!.User.Balance += 1;
@@ -61,11 +63,21 @@ namespace Nanr.Api.Managers
                 TagId = tag!.Id,
                 UserId = userId,
                 Timestamp = now,
-                Page = page
+                ViewId = clickModel.viewId,
+                PageId = clickModel.PageId,
+                Page = clickModel.Page,
+                Referrer = clickModel.Referrer
             });
             await context.SaveChangesAsync();
             await transaction.CommitAsync();
-            return errors;
+
+            var tagOwner = tag.UserId;
+            response.TotalNanrCount = await context.Clicks.Where(x => x.UserId == userId && x.Tag.UserId == tagOwner).CountAsync();
+            if (!string.IsNullOrWhiteSpace(clickModel.PageId))
+            {
+                response.PageNanrCount = await context.Clicks.Where(x => x.UserId == userId && x.PageId == clickModel.PageId && x.Tag.UserId == tagOwner).CountAsync();
+            }
+            return response;
         }
 
         private readonly NanrDbContext context;

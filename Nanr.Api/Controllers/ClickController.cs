@@ -23,9 +23,7 @@ namespace Nanr.Api.Controllers
         [HttpPost]
         public async Task<ClickResponseModel> Click(ClickModel clickModel)
         {
-            var errors = new List<string>();
-            errors.AddRange(await clickManager.Click(NanrUser!.Id, clickModel.TagId!, clickModel.Page));
-            return new ClickResponseModel(errors);
+            return await clickManager.Click(clickModel, NanrUser!.Id);
         }
 
         private readonly IClickManager clickManager;

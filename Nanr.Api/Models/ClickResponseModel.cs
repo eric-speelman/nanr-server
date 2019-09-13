@@ -10,9 +10,10 @@ namespace Nanr.Api.Models
         public ClickResponseModel(IEnumerable<string> errors)
         {
             Errors = errors;
-            Success = !errors.Any();
         }
-        public bool Success { get; }
+        public bool Success => !Errors.Any();
         public IEnumerable<string> Errors { get; }
+        public int? PageNanrCount { get; set; }
+        public int? TotalNanrCount { get; set; }
     }
 }

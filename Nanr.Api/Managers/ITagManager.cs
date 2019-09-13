@@ -9,7 +9,7 @@ namespace Nanr.Api.Managers
 {
     public interface ITagManager
     {
-        Task View(TagViewModel model);
+        Task<TagViewResponseModel> View(TagViewModel model);
         Task<Tag> GetDefaultTag(User user);
     }
 }

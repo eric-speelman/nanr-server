@@ -8,6 +8,20 @@ namespace Nanr.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Contacts",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Timestamp = table.Column<DateTime>(nullable: false),
+                    Email = table.Column<string>(nullable: true),
+                    Message = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Contacts", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -69,6 +83,7 @@ namespace Nanr.Data.Migrations
                 {
                     Id = table.Column<Guid>(nullable: false),
                     UserId = table.Column<Guid>(nullable: false),
+                    Email = table.Column<string>(nullable: true),
                     NanrAmount = table.Column<int>(nullable: false),
                     UsdAmount = table.Column<decimal>(type: "decimal(10, 2)", nullable: false),
                     TransactionFee = table.Column<int>(nullable: false),
@@ -94,7 +109,10 @@ namespace Nanr.Data.Migrations
                     Timestamp = table.Column<DateTime>(nullable: false),
                     UserId = table.Column<Guid>(nullable: false),
                     TagId = table.Column<Guid>(nullable: false),
-                    Page = table.Column<string>(nullable: true)
+                    ViewId = table.Column<Guid>(nullable: false),
+                    Page = table.Column<string>(nullable: true),
+                    Referrer = table.Column<string>(nullable: true),
+                    PageId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -120,7 +138,10 @@ namespace Nanr.Data.Migrations
                     Id = table.Column<Guid>(nullable: false),
                     TagId = table.Column<Guid>(nullable: false),
                     UserId = table.Column<Guid>(nullable: true),
-                    Page = table.Column<string>(nullable: true)
+                    Timestamp = table.Column<DateTime>(nullable: false),
+                    Page = table.Column<string>(nullable: true),
+                    Referrer = table.Column<string>(nullable: true),
+                    PageId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -142,12 +163,12 @@ namespace Nanr.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "Balance", "CreatedOn", "Email", "LastLogin", "PasswordHash", "RepurchaseAmount", "Salt", "Username" },
-                values: new object[] { new Guid("8352b38f-7be1-4497-8b66-e9776d2ab8f1"), 20, new DateTime(2019, 8, 30, 21, 52, 12, 219, DateTimeKind.Utc).AddTicks(6259), "eric.t.speelman@gmail.com", null, "2jAJXn2ZLlH3oewf9tAb0Sl6ushDB0unLNqsRv3TBcw=", null, "RfJSCsZNibfFN7+d19Cy8A==", "Eric" });
+                values: new object[] { new Guid("8352b38f-7be1-4497-8b66-e9776d2ab8f1"), 20, new DateTime(2019, 9, 12, 15, 58, 49, 958, DateTimeKind.Utc).AddTicks(1529), "eric.t.speelman@gmail.com", null, "2jAJXn2ZLlH3oewf9tAb0Sl6ushDB0unLNqsRv3TBcw=", null, "RfJSCsZNibfFN7+d19Cy8A==", "Eric" });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "Balance", "CreatedOn", "Email", "LastLogin", "PasswordHash", "RepurchaseAmount", "Salt", "Username" },
-                values: new object[] { new Guid("74ef2b08-6b90-46c0-bd52-2acf81f35186"), 20, new DateTime(2019, 8, 30, 21, 52, 12, 219, DateTimeKind.Utc).AddTicks(7224), "test@fake.com", null, "2jAJXn2ZLlH3oewf9tAb0Sl6ushDB0unLNqsRv3TBcw=", null, "RfJSCsZNibfFN7+d19Cy8A==", "test" });
+                values: new object[] { new Guid("74ef2b08-6b90-46c0-bd52-2acf81f35186"), 20, new DateTime(2019, 9, 12, 15, 58, 49, 958, DateTimeKind.Utc).AddTicks(2539), "test@fake.com", null, "2jAJXn2ZLlH3oewf9tAb0Sl6ushDB0unLNqsRv3TBcw=", null, "RfJSCsZNibfFN7+d19Cy8A==", "test" });
 
             migrationBuilder.InsertData(
                 table: "Tags",
@@ -204,6 +225,9 @@ namespace Nanr.Data.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Clicks");
+
+            migrationBuilder.DropTable(
+                name: "Contacts");
 
             migrationBuilder.DropTable(
                 name: "Sessions");

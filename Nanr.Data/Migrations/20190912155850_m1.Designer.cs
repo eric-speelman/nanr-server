@@ -10,14 +10,14 @@ using Nanr.Data;
 namespace Nanr.Data.Migrations
 {
     [DbContext(typeof(NanrDbContext))]
-    [Migration("20190830215212_m1")]
+    [Migration("20190912155850_m1")]
     partial class m1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.0.0-preview8.19405.11")
+                .HasAnnotation("ProductVersion", "3.0.0-preview9.19423.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -30,6 +30,12 @@ namespace Nanr.Data.Migrations
                     b.Property<string>("Page")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("PageId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Referrer")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid>("TagId")
                         .HasColumnType("uniqueidentifier");
 
@@ -39,6 +45,9 @@ namespace Nanr.Data.Migrations
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("ViewId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
                     b.HasIndex("TagId");
@@ -46,6 +55,26 @@ namespace Nanr.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Clicks");
+                });
+
+            modelBuilder.Entity("Nanr.Data.Models.Contact", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Timestamp")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Contacts");
                 });
 
             modelBuilder.Entity("Nanr.Data.Models.Session", b =>
@@ -106,8 +135,17 @@ namespace Nanr.Data.Migrations
                     b.Property<string>("Page")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("PageId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Referrer")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid>("TagId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Timestamp")
+                        .HasColumnType("datetime2");
 
                     b.Property<Guid?>("UserId")
                         .HasColumnType("uniqueidentifier");
@@ -162,7 +200,7 @@ namespace Nanr.Data.Migrations
                         {
                             Id = new Guid("8352b38f-7be1-4497-8b66-e9776d2ab8f1"),
                             Balance = 20,
-                            CreatedOn = new DateTime(2019, 8, 30, 21, 52, 12, 219, DateTimeKind.Utc).AddTicks(6259),
+                            CreatedOn = new DateTime(2019, 9, 12, 15, 58, 49, 958, DateTimeKind.Utc).AddTicks(1529),
                             Email = "eric.t.speelman@gmail.com",
                             PasswordHash = "2jAJXn2ZLlH3oewf9tAb0Sl6ushDB0unLNqsRv3TBcw=",
                             Salt = "RfJSCsZNibfFN7+d19Cy8A==",
@@ -172,7 +210,7 @@ namespace Nanr.Data.Migrations
                         {
                             Id = new Guid("74ef2b08-6b90-46c0-bd52-2acf81f35186"),
                             Balance = 20,
-                            CreatedOn = new DateTime(2019, 8, 30, 21, 52, 12, 219, DateTimeKind.Utc).AddTicks(7224),
+                            CreatedOn = new DateTime(2019, 9, 12, 15, 58, 49, 958, DateTimeKind.Utc).AddTicks(2539),
                             Email = "test@fake.com",
                             PasswordHash = "2jAJXn2ZLlH3oewf9tAb0Sl6ushDB0unLNqsRv3TBcw=",
                             Salt = "RfJSCsZNibfFN7+d19Cy8A==",
@@ -188,6 +226,9 @@ namespace Nanr.Data.Migrations
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("NanrAmount")
                         .HasColumnType("int");

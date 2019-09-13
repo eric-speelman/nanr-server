@@ -28,6 +28,12 @@ namespace Nanr.Data.Migrations
                     b.Property<string>("Page")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("PageId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Referrer")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid>("TagId")
                         .HasColumnType("uniqueidentifier");
 
@@ -35,6 +41,9 @@ namespace Nanr.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ViewId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -124,8 +133,17 @@ namespace Nanr.Data.Migrations
                     b.Property<string>("Page")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("PageId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Referrer")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid>("TagId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Timestamp")
+                        .HasColumnType("datetime2");
 
                     b.Property<Guid?>("UserId")
                         .HasColumnType("uniqueidentifier");
@@ -180,7 +198,7 @@ namespace Nanr.Data.Migrations
                         {
                             Id = new Guid("8352b38f-7be1-4497-8b66-e9776d2ab8f1"),
                             Balance = 20,
-                            CreatedOn = new DateTime(2019, 9, 9, 23, 35, 2, 746, DateTimeKind.Utc).AddTicks(3779),
+                            CreatedOn = new DateTime(2019, 9, 12, 15, 58, 49, 958, DateTimeKind.Utc).AddTicks(1529),
                             Email = "eric.t.speelman@gmail.com",
                             PasswordHash = "2jAJXn2ZLlH3oewf9tAb0Sl6ushDB0unLNqsRv3TBcw=",
                             Salt = "RfJSCsZNibfFN7+d19Cy8A==",
@@ -190,7 +208,7 @@ namespace Nanr.Data.Migrations
                         {
                             Id = new Guid("74ef2b08-6b90-46c0-bd52-2acf81f35186"),
                             Balance = 20,
-                            CreatedOn = new DateTime(2019, 9, 9, 23, 35, 2, 746, DateTimeKind.Utc).AddTicks(6700),
+                            CreatedOn = new DateTime(2019, 9, 12, 15, 58, 49, 958, DateTimeKind.Utc).AddTicks(2539),
                             Email = "test@fake.com",
                             PasswordHash = "2jAJXn2ZLlH3oewf9tAb0Sl6ushDB0unLNqsRv3TBcw=",
                             Salt = "RfJSCsZNibfFN7+d19Cy8A==",

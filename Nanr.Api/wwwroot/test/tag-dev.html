@@ -9,12 +9,29 @@
         }
     </style>
     <script src="http://localhost:4200/assets/tags/nanr.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
     <h1>Tag Test</h1>
     <div>Above</div>
     <div nanr-id="fa81e3d2-5741-46ab-875e-5e6a14870eb0"></div>
     <div>Below</div>
+    <div>saas;askljaslkdjsa</div>
+    <div>saas;askljaslkdjsa</div>
+    <div>saas;askljaslkdjsa</div><div>saas;askljaslkdjsa</div>
+    <div>saas;askljaslkdjsa</div>
+    <div>saas;askljaslkdjsa</div><div>saas;askljaslkdjsa</div><div>saas;askljaslkdjsa</div><div>saas;askljaslkdjsa</div>
+    <div>saas;askljaslkdjsa</div><div>saas;askljaslkdjsa</div><div>saas;askljaslkdjsa</div><div>saas;askljaslkdjsa</div><div>saas;askljaslkdjsa</div>
+    <div>saas;askljaslkdjsa</div><div>saas;askljaslkdjsa</div><div>saas;askljaslkdjsa</div><div>saas;askljaslkdjsa</div><div>saas;askljaslkdjsa</div>
+    <div>saas;askljaslkdjsa</div><div>saas;askljaslkdjsa</div><div>saas;askljaslkdjsa</div><div>saas;askljaslkdjsa</div><div>saas;askljaslkdjsa</div><div>saas;askljaslkdjsa</div>
+    <div>saas;askljaslkdjsa</div><div>saas;askljaslkdjsa</div><div>saas;askljaslkdjsa</div><div>saas;askljaslkdjsa</div>
+    <div>saas;askljaslkdjsa</div><div>saas;askljaslkdjsa</div><div>saas;askljaslkdjsa</div><div>saas;askljaslkdjsa</div><div>saas;askljaslkdjsa</div><div>saas;askljaslkdjsa</div>
+    <div>saas;askljaslkdjsa</div><div>saas;askljaslkdjsa</div><div>saas;askljaslkdjsa</div><div>saas;askljaslkdjsa</div><div>saas;askljaslkdjsa</div>
+    <div>saas;askljaslkdjsa</div><div>saas;askljaslkdjsa</div><div>saas;askljaslkdjsa</div><div>saas;askljaslkdjsa</div>
+    <div>saas;askljaslkdjsa</div><div>saas;askljaslkdjsa</div><div>saas;askljaslkdjsa</div><div>saas;askljaslkdjsa</div><div>saas;askljaslkdjsa</div><div>saas;askljaslkdjsa</div>
+    <div>saas;askljaslkdjsa</div>
+    <div>saas;askljaslkdjsa</div>
+    <div>saas;askljaslkdjsa</div>
     <button onclick="test()">Test</button>
     <script>
         function test() {
@@ -22,6 +39,14 @@
                 el.click();
             })
         }
+        nanr.onNanr((msg) => {
+            console.log(msg)
+        });
+        nanr.require({
+            username: 'test',
+            pageCnt: 20,
+            pageId: 'some-page'
+        });
     </script>
 </body>
 </html>

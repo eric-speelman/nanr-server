@@ -28,8 +28,7 @@ namespace Nanr.Api.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> TagView([FromBody]TagViewModel tagViewModel) 
         {
-            await tagManager.View(tagViewModel);
-            return Ok();
+            return Ok(await tagManager.View(tagViewModel));
         }
 
     private readonly ITagManager tagManager;

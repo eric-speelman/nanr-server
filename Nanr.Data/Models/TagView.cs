@@ -11,6 +11,9 @@ namespace Nanr.Data.Models
         public Tag Tag { get; set; }
         public Guid? UserId { get; set; }
         public User User { get; set; }
+        public DateTime Timestamp { get; set; }
         public string Page { get; set; }
+        public string Referrer { get; set; }
+        public string PageId { get; set; }
     }
 }
