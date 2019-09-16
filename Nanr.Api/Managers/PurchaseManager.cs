@@ -15,11 +15,12 @@ namespace Nanr.Api.Managers
 {
     public class PurchaseManager : IPurchaseManager
     {
-        public PurchaseManager(NanrDbContext context, string squareApiBase, string squareApiKey)
+        public PurchaseManager(NanrDbContext context, string squareApiBase, string squareApiKey, IEmailManager emailManager)
         {
             this.context = context;
             this.configuration = new Configuration(new ApiClient(squareApiBase));
             this.configuration.AccessToken = squareApiKey;
+            this.emailManager = emailManager;
         }
 
         public async Task<bool> Purchase(PurchaseModel purchaseModel, User user)
@@ -35,6 +36,15 @@ namespace Nanr.Api.Managers
                 if (response.Payment.Status == "COMPLETED")
                 {
                     user.Balance += amount;
+                    var purchase = new Purchase
+                    {
+                        Id = Guid.NewGuid(),
+                        NanrAmount = amount,
+                        UsdAmount = price,
+                        Timestamp = DateTime.UtcNow
+                    };
+                    context.Purchases.Add(purchase);
+                    await emailManager.SendPurchase(user, purchase);
                 } else
                 {
                     return false;
@@ -75,6 +85,7 @@ namespace Nanr.Api.Managers
             context.Withdraws.Add(withdraw);
             await context.SaveChangesAsync();
             await transaction.CommitAsync();
+            await emailManager.SendWithdraw(user);
             return null;
         }
 
@@ -103,5 +114,6 @@ namespace Nanr.Api.Managers
 
         private readonly NanrDbContext context;
         readonly Configuration configuration;
+        private IEmailManager emailManager;
     }
 }

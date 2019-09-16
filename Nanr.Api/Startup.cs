@@ -33,6 +33,10 @@ namespace Nanr.Api
             {
                 return new PurchaseManager(s.GetRequiredService<NanrDbContext>(), Configuration.GetValue<string>("squareApiBase"), Configuration.GetValue<string>("squareApiKey"));
             });
+            services.AddScoped<IEmailManager>(s =>
+            {
+                return new EmailManager(Configuration.GetValue<string>("sendGridKey"));
+            });
             services.AddScoped<ITransactionManager, TransactionManager>();
             services.AddScoped<ITagManager, TagManager>();
             services.AddScoped<IContactManager, ContactManager>();

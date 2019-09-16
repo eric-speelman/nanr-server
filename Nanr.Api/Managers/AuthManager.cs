@@ -14,9 +14,10 @@ namespace Nanr.Api.Managers
 {
     public class AuthManager : IAuthManager
     {
-        public AuthManager(NanrDbContext context)
+        public AuthManager(NanrDbContext context, IEmailManager emailManager)
         {
             this.context = context;
+            this.emailManager = emailManager;
         }
         public static (string salt, string passwordHash) SaltAndHash(string password)
         {
@@ -87,6 +88,7 @@ namespace Nanr.Api.Managers
             context.Tags.Add(tag);
             await context.SaveChangesAsync();
             var session = await CreateSession(signupModel.Email!, signupModel.Password!);
+            await emailManager.SendWelcome(user);
             return new SignupResponseModel(true, errors, session);
         }
 
@@ -101,5 +103,6 @@ namespace Nanr.Api.Managers
         }
 
         private NanrDbContext context;
+        private readonly IEmailManager emailManager;
     }
 }

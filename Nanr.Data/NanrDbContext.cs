@@ -18,6 +18,9 @@ namespace Nanr.Data
             builder.Entity<Withdraw>()
             .Property(x => x.UsdAmount)
             .HasColumnType("decimal(10, 2)");
+            builder.Entity<Purchase>()
+            .Property(x => x.UsdAmount)
+            .HasColumnType("decimal(10, 2)");
             var userId = Guid.Parse("8352b38f-7be1-4497-8b66-e9776d2ab8f1");
             var tagId = Guid.Parse("c748c8e3-da3f-4151-9e0d-190d1923c5ac");
             var testUserId = Guid.Parse("74ef2b08-6b90-46c0-bd52-2acf81f35186");
@@ -68,5 +71,6 @@ namespace Nanr.Data
         public DbSet<Withdraw> Withdraws { get; set; }
         public DbSet<TagView> TagViews { get; set; }
         public DbSet<Contact> Contacts { get; set; }
+        public DbSet<Purchase> Purchases { get; set; }
     }
 }
