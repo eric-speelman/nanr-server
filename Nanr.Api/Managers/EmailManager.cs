@@ -42,6 +42,12 @@ namespace Nanr.Api.Managers
             await SendEmail(user.Email, user.Username, "support@nanr.io", "Nanr Support", "Withdraw Confirmation", body);
         }
 
+        public async Task SendPasswordResetEmail(User user)
+        {
+            var text = "If you did not request a password reset please disregard this email.  To reset your password please navigate to <a href='https://nanr.io/account/reset'>https://nanr.io/account/reset</a>.";
+            await SendEmail(user.Email, user.Username, "support@nanr.io", "Nanr Support", "Nanr Password Reset", text);
+        }
+
         private readonly string sendGridKey;
     }
 }

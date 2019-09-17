@@ -11,7 +11,7 @@ namespace Nanr.Data.Models
         public string PasswordHash { get; set; }
         public string Salt { get; set; }
         public int Balance { get; set; }
-        public string? RepurchaseAmount { get; set; }
+        public Guid? ResetCode { get; set; }
         public ICollection<Tag> Tags { get; set; }
         public ICollection<Click> Clicks { get; set; }
         public ICollection<Withdraw> Withdraws { get; set; }

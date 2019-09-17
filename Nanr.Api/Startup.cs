@@ -31,7 +31,7 @@ namespace Nanr.Api
             services.AddScoped<IClickManager, ClickManager>();
             services.AddScoped<IPurchaseManager>(s =>
             {
-                return new PurchaseManager(s.GetRequiredService<NanrDbContext>(), Configuration.GetValue<string>("squareApiBase"), Configuration.GetValue<string>("squareApiKey"));
+                return new PurchaseManager(s.GetRequiredService<NanrDbContext>(), Configuration.GetValue<string>("squareApiBase"), Configuration.GetValue<string>("squareApiKey"), s.GetRequiredService<IEmailManager>());
             });
             services.AddScoped<IEmailManager>(s =>
             {

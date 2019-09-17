@@ -12,5 +12,6 @@ namespace Nanr.Api.Managers
         Task SendWelcome(User user);
         Task SendPurchase(User user, Purchase purchase);
         Task SendWithdraw(User user);
+        Task SendPasswordResetEmail(User user);
     }
 }

@@ -52,6 +52,27 @@ namespace Nanr.Api.Managers
             return session;
         }
 
+        public async Task SetResetCode(string email)
+        {
+            var user = await context.Users.Where(x => x.Email == email).SingleOrDefaultAsync();
+            if (user != null)
+            {
+                user.ResetCode = Guid.NewGuid();
+                await context.SaveChangesAsync();
+                await emailManager.SendPasswordResetEmail(user);
+            }
+        }
+
+        public async Task ResetPassword(ResetPasswordModel model)
+        {
+            var user = await context.Users.Where(x => x.ResetCode == model.Token).SingleAsync();
+            var saltHash = SaltAndHash(model.Password!);
+            user.PasswordHash = saltHash.passwordHash;
+            user.Salt = saltHash.salt;
+            user.ResetCode = null;
+            await context.SaveChangesAsync();
+        }
+
         public async Task<SignupResponseModel> Signup(SignupModel signupModel)
         {
             var errors = new Dictionary<string, string>();
