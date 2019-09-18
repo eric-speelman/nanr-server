@@ -29,7 +29,7 @@ namespace Nanr.Api.Controllers
         [Route("api/account/home-summary")]
         public async Task<HomeSummaryModel> Summary()
         {
-            var recent = await transactionManager.RecentTransactionCount(NanrUser!, 7);
+            var recent = await transactionManager.RecentTransactionCount(NanrUser!);
             return new HomeSummaryModel
             {
                 Balance = NanrUser!.Balance,

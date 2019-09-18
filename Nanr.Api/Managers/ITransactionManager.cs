@@ -12,6 +12,6 @@ namespace Nanr.Api.Managers
         Task<IEnumerable<ClickTransaction>> GetClickTransactionsRecieved(User user);
         Task<IEnumerable<WithdrawTransaction>> GetWithdrawTransaction(User user);
         Task<IEnumerable<ClickTransaction>> GetClickTransactionsSent(User user);
-        Task<(int sent, int recieved)> RecentTransactionCount(User user, int length);
+        Task<(int sent, int recieved)> RecentTransactionCount(User user, int? length = null);
     }
 }

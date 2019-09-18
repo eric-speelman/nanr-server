@@ -47,10 +47,18 @@ namespace Nanr.Api.Managers
             });
         }
 
-        public async Task<(int sent, int recieved)> RecentTransactionCount(User user, int length)
+        public async Task<(int sent, int recieved)> RecentTransactionCount(User user, int? length = null)
         {
             var start = DateTime.UtcNow;
-            var end = start.AddDays(-length);
+            DateTime end;
+            if (length == null)
+            {
+                end = start.AddDays(-(int)start.DayOfWeek).Date;
+            }
+            else
+            {
+                end = start.AddDays(-length.Value);
+            }
             var rangeQuery = context.Clicks.Where(x => x.Timestamp >= end && x.Timestamp <= start);
             var sent = await rangeQuery.Where(x => x.UserId == user.Id).CountAsync();
             var recieved = await rangeQuery.Where(x => x.Tag.UserId == user.Id).CountAsync();
