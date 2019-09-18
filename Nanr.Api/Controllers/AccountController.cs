@@ -39,7 +39,7 @@ namespace Nanr.Api.Controllers
         }
 
         [HttpPost]
-        [Route("apl/account/reset-password")]
+        [Route("api/account/reset-password")]
         [AllowAnonymous]
         public async Task Reset([FromBody]string email)
         {
@@ -47,7 +47,7 @@ namespace Nanr.Api.Controllers
         }
 
         [HttpPost]
-        [Route("apl/account/reset-password-set")]
+        [Route("api/account/reset-password-set")]
         [AllowAnonymous]
         public async Task<ActionResult> ResetSet([FromBody]ResetPasswordModel model)
         {
