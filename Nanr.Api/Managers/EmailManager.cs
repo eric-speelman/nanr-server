@@ -44,7 +44,7 @@ namespace Nanr.Api.Managers
 
         public async Task SendPasswordResetEmail(User user)
         {
-            var text = "If you did not request a password reset please disregard this email.  To reset your password please navigate to <a href='https://nanr.io/account/reset'>https://nanr.io/account/reset</a>.";
+            var text = "If you did not request a password reset please disregard this email.  To reset your password please navigate to https://app.nanr.io/account/reset/" + user.ResetCode;
             await SendEmail(user.Email, user.Username, "support@nanr.io", "Nanr Support", "Nanr Password Reset", text);
         }
 

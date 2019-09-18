@@ -41,9 +41,9 @@ namespace Nanr.Api.Controllers
         [HttpPost]
         [Route("api/account/reset-password")]
         [AllowAnonymous]
-        public async Task Reset([FromBody]string email)
+        public async Task Reset([FromBody]ResetPasswordStartModel model)
         {
-            await authManager.SetResetCode(email);
+            await authManager.SetResetCode(model.Email!);
         }
 
         [HttpPost]
