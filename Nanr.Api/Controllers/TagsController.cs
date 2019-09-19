@@ -31,6 +31,6 @@ namespace Nanr.Api.Controllers
             return Ok(await tagManager.View(tagViewModel));
         }
 
-    private readonly ITagManager tagManager;
+        private readonly ITagManager tagManager;
     }
 }

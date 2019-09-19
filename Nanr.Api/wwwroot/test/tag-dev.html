@@ -14,7 +14,7 @@
 <body>
     <h1>Tag Test</h1>
     <div>Above</div>
-    <div nanr-id="fa81e3d2-5741-46ab-875e-5e6a14870eb0"></div>
+    <div nanr-id="fa81e3d2-5741-46ab-875e-5e6a14870eb0" nanr-pageid="pageId"></div>
     <div>Below</div>
     <div>saas;askljaslkdjsa</div>
     <div>saas;askljaslkdjsa</div>
@@ -41,11 +41,14 @@
         }
         nanr.onNanr((msg) => {
             console.log(msg)
+        }, {
+                username: 'test',
+                pageIds: ['not on page']
         });
         nanr.require({
             username: 'test',
-            pageCnt: 20,
-            pageId: 'some-page'
+            pageCnt: 30,
+            pageId: 'some-page',
         });
     </script>
 </body>
