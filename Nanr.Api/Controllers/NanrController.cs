@@ -11,6 +11,6 @@ namespace Nanr.Api.Controllers
     public abstract class NanrController : ControllerBase
     {
         public User? NanrUser { get; set; }
-        public bool UsedButtonToken { get; set; }
+        public Guid SessionId { get; set; }
     }
 }

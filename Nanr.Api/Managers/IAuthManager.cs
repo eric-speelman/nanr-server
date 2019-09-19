@@ -12,5 +12,8 @@ namespace Nanr.Api.Managers
         Task<SignupResponseModel> Signup(SignupModel signupModel);
         Task SetResetCode(string email);
         Task ResetPassword(ResetPasswordModel model);
+        Task<string?> UpdateProfile(UpdateProfileModel profile, User user);
+        Task<bool> ChangePassword(ChangePasswordModel model, User user);
+        Task Logout(Guid sessionId);
     }
 }

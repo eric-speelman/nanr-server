@@ -61,6 +61,7 @@ namespace Nanr.Api.Filters
                                     if (context.Controller is NanrController controller)
                                     {
                                         controller.NanrUser = session.User;
+                                        controller.SessionId = session.Id;
                                     }
                                     context.Result = (await next()).Result;
                                 }

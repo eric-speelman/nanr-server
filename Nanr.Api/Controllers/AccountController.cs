@@ -59,6 +59,70 @@ namespace Nanr.Api.Controllers
             return Ok();
         }
 
+        [HttpGet]
+        [Route("api/account/profile")]
+        public ProfileModel Profile()
+        {
+            return new ProfileModel
+            {
+                Email = NanrUser!.Email,
+                Username = NanrUser!.Username
+            };
+        }
+
+        [HttpPost]
+        [Route("api/account/profile")]
+        public async Task<IEnumerable<string>> UpdateProfile(UpdateProfileModel profile)
+        {
+            if (ModelState.IsValid)
+            {
+                var error = await authManager.UpdateProfile(profile, NanrUser!);
+                if(!string.IsNullOrWhiteSpace(error))
+                {
+                    return new List<string>()
+                    {
+                        error
+                    };
+                }
+                return new string[0];
+            }
+            else
+            {
+                var errors = ModelState.Where(x => x.Value.Errors.Count > 0).Select(x => x.Value.Errors.First().ErrorMessage);
+                return errors;
+            }
+        }
+
+        [HttpPost]
+        [Route("api/account/change-password")]
+        public async Task<IEnumerable<string>> ChangePassword(ChangePasswordModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var hasError = await authManager.ChangePassword(model, NanrUser!);
+                if (!hasError)
+                {
+                    return new List<string>()
+                    {
+                        "Incorrect password"
+                    };
+                }
+                return new string[0];
+            }
+            else
+            {
+                var errors = ModelState.Where(x => x.Value.Errors.Count > 0).Select(x => x.Value.Errors.First().ErrorMessage);
+                return errors;
+            }
+        }
+
+        [HttpPost]
+        [Route("api/account/logout")]
+        public async Task Logout()
+        {
+            await authManager.Logout(SessionId);
+        }
+
         private readonly ITransactionManager transactionManager;
         private readonly IAuthManager authManager;
     }

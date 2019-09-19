@@ -113,6 +113,39 @@ namespace Nanr.Api.Managers
             return new SignupResponseModel(true, errors, session);
         }
 
+        public async Task<string?> UpdateProfile(UpdateProfileModel profile, User user)
+        {
+            if (!string.IsNullOrWhiteSpace(profile.Email))
+            {
+                if(await context.Users.AnyAsync(x => x.Id != user.Id && x.Email == profile.Email))
+                {
+                    return "That email address is already being used";
+                }
+                user.Email = profile.Email;
+                await context.SaveChangesAsync();
+            }
+            return null;
+        }
+
+        public async Task<bool> ChangePassword(ChangePasswordModel model, User user)
+        {
+            var currentPasswordHash = HashPassword(Convert.FromBase64String(user.Salt), model.Password!);
+            if(currentPasswordHash != user.PasswordHash)
+            {
+                return false;
+            }
+            user.PasswordHash = HashPassword(Convert.FromBase64String(user.Salt), model.NewPassword!);
+            await context.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task Logout(Guid sessionId)
+        {
+            var session = await context.Sessions.Where(x => x.Id == sessionId).SingleAsync();
+            context.Sessions.Remove(session);
+            await context.SaveChangesAsync();
+        }
+
         private static string HashPassword(byte[] salt, string password)
         {
             return Convert.ToBase64String(KeyDerivation.Pbkdf2(
