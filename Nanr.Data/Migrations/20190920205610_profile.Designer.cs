@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Nanr.Data;
 
 namespace Nanr.Data.Migrations
 {
     [DbContext(typeof(NanrDbContext))]
-    partial class NanrDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190920205610_profile")]
+    partial class profile
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -216,9 +218,6 @@ namespace Nanr.Data.Migrations
                     b.Property<string>("Username")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("isStandTextDark")
-                        .HasColumnType("bit");
-
                     b.HasKey("Id");
 
                     b.HasIndex("Email");
@@ -229,28 +228,22 @@ namespace Nanr.Data.Migrations
                         new
                         {
                             Id = new Guid("8352b38f-7be1-4497-8b66-e9776d2ab8f1"),
-                            BackgroundColor = "#FAFAFA",
                             Balance = 20,
-                            CreatedOn = new DateTime(2019, 9, 20, 23, 5, 41, 744, DateTimeKind.Utc).AddTicks(77),
+                            CreatedOn = new DateTime(2019, 9, 20, 20, 56, 10, 333, DateTimeKind.Utc).AddTicks(3857),
                             Email = "eric.t.speelman@gmail.com",
                             PasswordHash = "2jAJXn2ZLlH3oewf9tAb0Sl6ushDB0unLNqsRv3TBcw=",
                             Salt = "RfJSCsZNibfFN7+d19Cy8A==",
-                            Tagline = "Little things add up",
-                            Username = "Eric",
-                            isStandTextDark = true
+                            Username = "Eric"
                         },
                         new
                         {
                             Id = new Guid("74ef2b08-6b90-46c0-bd52-2acf81f35186"),
-                            BackgroundColor = "#FAFAFA",
                             Balance = 20,
-                            CreatedOn = new DateTime(2019, 9, 20, 23, 5, 41, 744, DateTimeKind.Utc).AddTicks(2276),
+                            CreatedOn = new DateTime(2019, 9, 20, 20, 56, 10, 333, DateTimeKind.Utc).AddTicks(5049),
                             Email = "test@fake.com",
                             PasswordHash = "2jAJXn2ZLlH3oewf9tAb0Sl6ushDB0unLNqsRv3TBcw=",
                             Salt = "RfJSCsZNibfFN7+d19Cy8A==",
-                            Tagline = "Little things add up",
-                            Username = "test",
-                            isStandTextDark = true
+                            Username = "test"
                         });
                 });
 

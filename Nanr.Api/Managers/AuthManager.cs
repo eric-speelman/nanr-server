@@ -97,7 +97,10 @@ namespace Nanr.Api.Managers
                 Email = signupModel.Email,
                 Username = signupModel.Username,
                 Salt = saltHash.salt,
-                PasswordHash = saltHash.passwordHash
+                PasswordHash = saltHash.passwordHash,
+                Tagline = "Little things add up",
+                BackgroundColor = "#FAFAFA",
+                isStandTextDark = true
             };
             var tag = new Tag
             {
@@ -115,6 +118,7 @@ namespace Nanr.Api.Managers
 
         public async Task<string?> UpdateProfile(UpdateProfileModel profile, User user)
         {
+            var save = false;
             if (!string.IsNullOrWhiteSpace(profile.Email))
             {
                 if(await context.Users.AnyAsync(x => x.Id != user.Id && x.Email == profile.Email))
@@ -122,6 +126,33 @@ namespace Nanr.Api.Managers
                     return "That email address is already being used";
                 }
                 user.Email = profile.Email;
+                save = true;
+            }
+            if(profile.Tagline != null)
+            {
+                user.Tagline = profile.Tagline;
+                save = true;
+            }
+
+            if (profile.Bio != null)
+            {
+                user.Bio = profile.Bio;
+                save = true;
+            }
+
+            if(profile.BackgroundColor != null)
+            {
+                user.BackgroundColor = profile.BackgroundColor;
+                save = true;
+            }
+
+            if(profile.DarkText != null)
+            {
+                user.isStandTextDark = profile.DarkText.Value;
+                save = true;
+            }
+            if(save)
+            {
                 await context.SaveChangesAsync();
             }
             return null;
@@ -144,6 +175,20 @@ namespace Nanr.Api.Managers
             var session = await context.Sessions.Where(x => x.Id == sessionId).SingleAsync();
             context.Sessions.Remove(session);
             await context.SaveChangesAsync();
+        }
+
+        public async Task<User?> GetUser(string username)
+        {
+            User? user = null;
+            if(Guid.TryParse(username, out Guid userId))
+            {
+                user = await context.Users.Where(x => x.Id == userId).SingleOrDefaultAsync();
+            }
+            if (user == null)
+            {
+                user = await context.Users.Where(x => x.Username == username).SingleOrDefaultAsync();
+            }
+            return user;
         }
 
         private static string HashPassword(byte[] salt, string password)

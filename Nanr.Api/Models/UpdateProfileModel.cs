@@ -10,5 +10,12 @@ namespace Nanr.Api.Models
     {
         [EmailAddress]
         public string? Email { get; set; }
+        [MaxLength(125)]
+        public string? Tagline { get; set; }
+        [MaxLength(500)]
+        public string? Bio { get; set; }
+        [MaxLength(7)]
+        public string? BackgroundColor { get; set; }
+        public bool? DarkText { get; set; }
     }
 }

@@ -36,6 +36,9 @@ namespace Nanr.Data
                     PasswordHash = "2jAJXn2ZLlH3oewf9tAb0Sl6ushDB0unLNqsRv3TBcw=",
                     CreatedOn = DateTime.UtcNow,
                     LastLogin = null,
+                    Tagline = "Little things add up",
+                    BackgroundColor = "#FAFAFA",
+                    isStandTextDark = true
                 },
                 new User
                 {
@@ -47,6 +50,9 @@ namespace Nanr.Data
                     PasswordHash = "2jAJXn2ZLlH3oewf9tAb0Sl6ushDB0unLNqsRv3TBcw=",
                     CreatedOn = DateTime.UtcNow,
                     LastLogin = null,
+                    Tagline = "Little things add up",
+                    BackgroundColor = "#FAFAFA",
+                    isStandTextDark = true
                 }
             );
             builder.Entity<Tag>().HasData(

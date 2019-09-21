@@ -40,15 +40,13 @@
             })
         }
         nanr.onNanr((msg) => {
-            console.log(msg)
-        }, {
-                username: 'test',
-                pageIds: ['not on page']
+            console.log(msg);
         });
         nanr.require({
             username: 'test',
-            pageCnt: 30,
+            pageCnt: 38,
             pageId: 'some-page',
+            background: 'lines'
         });
     </script>
 </body>
