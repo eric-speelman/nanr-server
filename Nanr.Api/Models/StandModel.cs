@@ -5,15 +5,13 @@ using System.Threading.Tasks;
 
 namespace Nanr.Api.Models
 {
-    public class ProfileModel
+    public class StandModel
     {
         public Guid Id { get; set; }
-        public string? Email { get; set; }
         public string? Username { get; set; }
         public string? Tagline { get; set; }
         public string? Bio { get; set; }
         public string? BackgroundColor { get; set; }
         public bool DarkText { get; set; }
-        public int Balance { get; set; }
     }
 }

@@ -26,6 +26,27 @@ namespace Nanr.Api.Controllers
             return new UserModel(NanrUser!);
         }
 
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("api/stand")]
+        public async Task<ActionResult<StandModel>> Get(string username)
+        {
+            var user = await authManager.GetUser(username);
+            if (user != null)
+            {
+                return new StandModel
+                {
+                    Id = user.Id,
+                    Username = user.Username,
+                    BackgroundColor = user.BackgroundColor,
+                    Bio = user.Bio,
+                    DarkText = user.isStandTextDark,
+                    Tagline = user.Tagline
+                };
+            }
+            return BadRequest();
+        }
+
         [HttpGet]
         [Route("api/account/home-summary")]
         public async Task<HomeSummaryModel> Summary()
@@ -72,7 +93,8 @@ namespace Nanr.Api.Controllers
                 BackgroundColor = NanrUser!.BackgroundColor,
                 Tagline = NanrUser!.Tagline,
                 Bio = NanrUser!.Bio,
-                DarkText = NanrUser!.isStandTextDark
+                DarkText = NanrUser!.isStandTextDark,
+                Balance = NanrUser!.Balance
             };
         }
 
