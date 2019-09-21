@@ -9,12 +9,14 @@ namespace Nanr.Data.Models
         public Guid Id { get; set; }
         public Guid UserId { get; set; }
         public User User { get; set; }
-
         public string Email { get; set; }
         public int NanrAmount { get; set; }
         public decimal UsdAmount { get; set; }
         public int TransactionFee { get; set; }
         public int Status { get; set; }
+        public Guid? ReferralId { get; set; }
+        public User Referral { get; set; }
+        public int RefferalAmount { get; set; }
         public DateTime CreatedOn { get; set; }
     }
 }

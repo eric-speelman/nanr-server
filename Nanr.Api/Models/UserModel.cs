@@ -13,10 +13,14 @@ namespace Nanr.Api.Models
             Id = user.Id;
             Email = user.Email;
             Balance = user.Balance;
+            HasBilling = !string.IsNullOrWhiteSpace(user.CardId);
+            Refill = user.Repurchase;
         }
 
-        public Guid Id { get;  }
+        public Guid Id { get; }
         public string Email { get; }
         public int Balance { get; }
+        public bool HasBilling { get; }
+        public bool Refill {get;}
     }
 }

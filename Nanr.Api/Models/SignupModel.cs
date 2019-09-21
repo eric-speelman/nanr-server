@@ -20,5 +20,7 @@ namespace Nanr.Api.Models
         [MinLength(7)]
         [MaxLength(32)]
         public string? Password { get; set; }
+
+        public string? Referrer { get; set; }
     }
 }

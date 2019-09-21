@@ -8,5 +8,6 @@ namespace Nanr.Api.Models
     public class PurchaseResponseModel
     {
         public bool Success { get; set; }
+        public int Nanrs { get; set; }
     }
 }

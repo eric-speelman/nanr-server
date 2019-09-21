@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Nanr.Data;
 
 namespace Nanr.Data.Migrations
 {
     [DbContext(typeof(NanrDbContext))]
-    partial class NanrDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190921191550_ref")]
+    partial class @ref
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -213,9 +215,6 @@ namespace Nanr.Data.Migrations
                     b.Property<Guid?>("ReferrerId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("RefferrerRemainder")
-                        .HasColumnType("int");
-
                     b.Property<bool>("Repurchase")
                         .HasColumnType("bit");
 
@@ -232,7 +231,7 @@ namespace Nanr.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Username")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("isStandTextDark")
                         .HasColumnType("bit");
@@ -243,8 +242,6 @@ namespace Nanr.Data.Migrations
 
                     b.HasIndex("ReferrerId");
 
-                    b.HasIndex("Username");
-
                     b.ToTable("Users");
 
                     b.HasData(
@@ -253,10 +250,9 @@ namespace Nanr.Data.Migrations
                             Id = new Guid("8352b38f-7be1-4497-8b66-e9776d2ab8f1"),
                             BackgroundColor = "#FAFAFA",
                             Balance = 20,
-                            CreatedOn = new DateTime(2019, 9, 21, 19, 55, 51, 475, DateTimeKind.Utc).AddTicks(5455),
+                            CreatedOn = new DateTime(2019, 9, 21, 19, 15, 50, 463, DateTimeKind.Utc).AddTicks(24),
                             Email = "eric.t.speelman@gmail.com",
                             PasswordHash = "2jAJXn2ZLlH3oewf9tAb0Sl6ushDB0unLNqsRv3TBcw=",
-                            RefferrerRemainder = 0,
                             Repurchase = false,
                             Salt = "RfJSCsZNibfFN7+d19Cy8A==",
                             Tagline = "Little things add up",
@@ -268,10 +264,9 @@ namespace Nanr.Data.Migrations
                             Id = new Guid("74ef2b08-6b90-46c0-bd52-2acf81f35186"),
                             BackgroundColor = "#FAFAFA",
                             Balance = 20,
-                            CreatedOn = new DateTime(2019, 9, 21, 19, 55, 51, 475, DateTimeKind.Utc).AddTicks(7809),
+                            CreatedOn = new DateTime(2019, 9, 21, 19, 15, 50, 463, DateTimeKind.Utc).AddTicks(2257),
                             Email = "test@fake.com",
                             PasswordHash = "2jAJXn2ZLlH3oewf9tAb0Sl6ushDB0unLNqsRv3TBcw=",
-                            RefferrerRemainder = 0,
                             Repurchase = false,
                             Salt = "RfJSCsZNibfFN7+d19Cy8A==",
                             Tagline = "Little things add up",
@@ -295,12 +290,6 @@ namespace Nanr.Data.Migrations
                     b.Property<int>("NanrAmount")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("ReferralId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("RefferalAmount")
-                        .HasColumnType("int");
-
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
@@ -314,8 +303,6 @@ namespace Nanr.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ReferralId");
 
                     b.HasIndex("UserId");
 
@@ -377,10 +364,6 @@ namespace Nanr.Data.Migrations
 
             modelBuilder.Entity("Nanr.Data.Models.Withdraw", b =>
                 {
-                    b.HasOne("Nanr.Data.Models.User", "Referral")
-                        .WithMany("ReferreeWithdraws")
-                        .HasForeignKey("ReferralId");
-
                     b.HasOne("Nanr.Data.Models.User", "User")
                         .WithMany("Withdraws")
                         .HasForeignKey("UserId")

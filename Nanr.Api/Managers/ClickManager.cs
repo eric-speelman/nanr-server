@@ -46,6 +46,15 @@ namespace Nanr.Api.Managers
                 errors.Add(NoUsernameOrTagId);
             }
             var user = await context.Users.SingleAsync(x => x.Id == userId);
+            if(user.Balance <= 0 && user.Repurchase && !string.IsNullOrWhiteSpace(user.BillingId) && !string.IsNullOrWhiteSpace(user.CardId) && !string.IsNullOrWhiteSpace(user.RepurchaseAmount))
+            {
+                await purchaseManager.Purchase(new PurchaseModel
+                {
+                    Amount = user.RepurchaseAmount,
+                    Refill = true,
+                    UseSaved = true,
+                }, user);
+            }
             if(!errors.Any() && user.Balance <= 0)
             {
                 errors.Add(InsufficientFundsError);

@@ -19,8 +19,7 @@ namespace Nanr.Api.Controllers
         [HttpPost]
         public async Task<PurchaseResponseModel> Purchase([FromBody]PurchaseModel purchaseModel)
         {
-            var response = new PurchaseResponseModel();
-            response.Success = await purchaseManager.Purchase(purchaseModel, NanrUser!);
+            var response = await purchaseManager.Purchase(purchaseModel, NanrUser!);
             return response;
         }
         

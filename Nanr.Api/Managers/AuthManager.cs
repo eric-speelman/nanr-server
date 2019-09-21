@@ -88,6 +88,20 @@ namespace Nanr.Api.Managers
             {
                 return new SignupResponseModel(false, errors, null);
             }
+            Guid? referrerId = null;
+            if (!string.IsNullOrWhiteSpace(signupModel.Referrer))
+            {
+                var username = signupModel.Referrer.Trim();
+                referrerId = context.Users.Where(x => x.Username == username).Select(x => x.Id).SingleOrDefault();
+                if (referrerId == Guid.Empty)
+                {
+                    errors.Add("referrer", "No one exists with that username");
+                }
+            }
+            if (errors.Any())
+            {
+                return new SignupResponseModel(false, errors, null);
+            }
             var saltHash = SaltAndHash(signupModel.Password!);
             var user = new User
             {
@@ -100,7 +114,9 @@ namespace Nanr.Api.Managers
                 PasswordHash = saltHash.passwordHash,
                 Tagline = "Little things add up",
                 BackgroundColor = "#FAFAFA",
-                isStandTextDark = true
+                isStandTextDark = true,
+                ReferrerId = referrerId,
+                RefferrerRemainder = 0
             };
             var tag = new Tag
             {

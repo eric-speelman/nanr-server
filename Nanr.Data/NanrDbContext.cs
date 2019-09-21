@@ -14,7 +14,10 @@ namespace Nanr.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<User>().HasIndex(x => x.Email);
+            builder.Entity<User>().HasIndex(x => x.Username);
             builder.Entity<Click>().HasOne(x => x.User).WithMany(x => x.Clicks).OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<User>().HasMany(x => x.Withdraws).WithOne(x => x.User);
+            builder.Entity<User>().HasMany(x => x.ReferreeWithdraws).WithOne(x => x.Referral);
             builder.Entity<Withdraw>()
             .Property(x => x.UsdAmount)
             .HasColumnType("decimal(10, 2)");
