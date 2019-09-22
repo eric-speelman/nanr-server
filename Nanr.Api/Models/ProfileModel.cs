@@ -15,5 +15,6 @@ namespace Nanr.Api.Models
         public string? BackgroundColor { get; set; }
         public bool DarkText { get; set; }
         public int Balance { get; set; }
+        public bool AutoRefill { get; set; }
     }
 }

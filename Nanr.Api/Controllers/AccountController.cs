@@ -94,7 +94,8 @@ namespace Nanr.Api.Controllers
                 Tagline = NanrUser!.Tagline,
                 Bio = NanrUser!.Bio,
                 DarkText = NanrUser!.isStandTextDark,
-                Balance = NanrUser!.Balance
+                Balance = NanrUser!.Balance,
+                AutoRefill = NanrUser!.Repurchase
             };
         }
 

@@ -17,5 +17,6 @@ namespace Nanr.Api.Models
         [MaxLength(7)]
         public string? BackgroundColor { get; set; }
         public bool? DarkText { get; set; }
+        public bool? AutoRefill { get; set; }
     }
 }

@@ -167,6 +167,11 @@ namespace Nanr.Api.Managers
                 user.isStandTextDark = profile.DarkText.Value;
                 save = true;
             }
+            if(profile.AutoRefill != null)
+            {
+                user.Repurchase = profile.AutoRefill.Value;
+                save = true;
+            }
             if(save)
             {
                 await context.SaveChangesAsync();
