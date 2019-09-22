@@ -15,6 +15,7 @@ namespace Nanr.Api.Models
         [MaxLength(500)]
         public string? Bio { get; set; }
         [MaxLength(7)]
+        [RegularExpression("^#[a-fA-f0-9]+")]
         public string? BackgroundColor { get; set; }
         public bool? DarkText { get; set; }
         public bool? AutoRefill { get; set; }

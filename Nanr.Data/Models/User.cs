@@ -23,6 +23,7 @@ namespace Nanr.Data.Models
         public User Referrer { get; set; }
         public int RefferrerRemainder { get; set; }
         public Guid? ResetCode { get; set; }
+        public Guid? EmailConfirmationCode { get; set; }
         public ICollection<Tag> Tags { get; set; }
         public ICollection<Click> Clicks { get; set; }
         public ICollection<Withdraw> Withdraws { get; set; }

@@ -16,5 +16,6 @@ namespace Nanr.Api.Managers
         Task<bool> ChangePassword(ChangePasswordModel model, User user);
         Task Logout(Guid sessionId);
         Task<User?> GetUser(string username);
+        Task<bool> ConfirmEmail(Guid code);
     }
 }

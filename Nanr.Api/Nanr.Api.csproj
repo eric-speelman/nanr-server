@@ -12,9 +12,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Emails\**" />
     <Compile Remove="Pages\**" />
+    <Content Remove="Emails\**" />
     <Content Remove="Pages\**" />
+    <EmbeddedResource Remove="Emails\**" />
     <EmbeddedResource Remove="Pages\**" />
+    <None Remove="Emails\**" />
     <None Remove="Pages\**" />
   </ItemGroup>
 
@@ -36,7 +40,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Emails\" />
     <Folder Include="Views\" />
   </ItemGroup>
 
