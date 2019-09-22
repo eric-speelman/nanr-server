@@ -39,9 +39,10 @@
                 el.click();
             })
         }
-        nanr.onNanr((msg) => {
-            console.log(msg);
-        });
+        function nanrEvent({ loggedIn, pageNanrs, totalNanrs, pageId }) {
+            //Add logic to integreate into your platform here
+        }
+        nanr.onNanr(nanrEvent);
         nanr.require({
             username: 'test',
             pageCnt: 38,

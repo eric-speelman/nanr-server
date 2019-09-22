@@ -1,0 +1,32 @@
+﻿@using Nanr.Api.Models
+@model StandDisplayModel
+
+<html>
+<head>
+    <style>
+        body {
+            height: 100%;
+            padding: 0px;
+            margin: 0px;
+        }
+
+        #stand {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <title>@Model.Username's Nanr Stand</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="@Model.Username's Nanr Stand" />
+    <meta property="og:type" content="profile" />
+    <meta property="og:image" content="@Model.AppUrl/assets/img/button-lg.png" />
+    <meta property="profile:username" content="@Model.Username">
+    <meta property="og:url" content="https://nanr.io/s/@Model.Username" />
+    <meta property="og:descriptor" content="@Model.TagLine" />
+    <meta property="og:site_name" content="Nanr" />
+</head>
+    <body>
+        <iframe id="stand" scrolling='no' frameborder=0 src="@Model.AppUrl/s/@Model.Username.ToLower()"></iframe>
+        <script src="@Model.AppUrl/assets/tags/nanr.js"></script>
+    </body>
+</html>
