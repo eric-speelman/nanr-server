@@ -64,7 +64,7 @@ namespace Nanr.Api
                 {
                     config.AllowAnyHeader();
                     config.AllowAnyMethod();
-                    config.WithOrigins("*");
+                    config.WithOrigins("*.nanr.io");
                 });
             }
             app.UseStaticFiles();
