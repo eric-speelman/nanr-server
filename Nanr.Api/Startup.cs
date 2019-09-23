@@ -64,7 +64,7 @@ namespace Nanr.Api
                 {
                     config.AllowAnyHeader();
                     config.AllowAnyMethod();
-                    config.WithOrigins("*.nanr.io");
+                    config.WithOrigins("https://*.nanr.io").SetIsOriginAllowedToAllowWildcardSubdomains();
                 });
             }
             app.UseStaticFiles();
