@@ -17,6 +17,16 @@
     </style>
     <title>@Model.Username's Nanr Stand</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="@Model.Username's Nanr Stand" />
+
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@@nanr">
+    <meta name="twitter:title" content="@Model.Username's Nanr Stand">
+    <meta name="twitter:description" content="@Model.TagLine">
+    <meta name="twitter:image" content="@Model.AppUrl/assets/img/button-lg.png">
+
+    <!-- Open Graph data -->
     <meta property="og:title" content="@Model.Username's Nanr Stand" />
     <meta property="og:type" content="profile" />
     <meta property="og:image" content="@Model.AppUrl/assets/img/button-lg.png" />
@@ -24,6 +34,11 @@
     <meta property="og:url" content="https://nanr.io/s/@Model.Username" />
     <meta property="og:descriptor" content="@Model.TagLine" />
     <meta property="og:site_name" content="Nanr" />
+
+    <!-- Schema.org markup for Google+ -->
+    <meta itemprop="name" content="@Model.Username's Nanr Stand">
+    <meta itemprop="description" content="@Model.TagLine">
+    <meta itemprop="image" content="@Model.AppUrl/assets/img/button-lg.png">
 </head>
     <body>
         <iframe id="stand" scrolling='no' frameborder=0 src="@Model.AppUrl/s/@Model.Username.ToLower()"></iframe>

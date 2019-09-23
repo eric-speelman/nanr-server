@@ -10,9 +10,9 @@ namespace Nanr.Api.Models
     {
         [EmailAddress]
         public string? Email { get; set; }
-        [MaxLength(125)]
+        [MaxLength(100)]
         public string? Tagline { get; set; }
-        [MaxLength(500)]
+        [MaxLength(250)]
         public string? Bio { get; set; }
         [MaxLength(7)]
         [RegularExpression("^#[a-fA-f0-9]+")]

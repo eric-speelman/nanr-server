@@ -13,6 +13,7 @@ namespace Nanr.Api.Models
         }
         public bool Success => !Errors.Any();
         public IEnumerable<string> Errors { get; }
+        public int? Balance { get; set; }
         public int? PageNanrCount { get; set; }
         public int? TotalNanrCount { get; set; }
     }
