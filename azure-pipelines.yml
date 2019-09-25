@@ -13,6 +13,8 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
+  variables:
+  MSBuildSDKsPath: 'C:\\hostedtoolcache\\windows\\dotnet\\sdk\\3.0.100\\sdks'
 
 steps:
 - task: UseDotNet@2
