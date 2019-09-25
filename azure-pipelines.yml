@@ -27,6 +27,7 @@ steps:
   
 - task: VSBuild@1
   inputs:
+    vsVersion: latest
     solution: '$(solution)'
     msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\nanr.zip" /p:DeployIisAppPath="Default Web Site"'
     platform: '$(buildPlatform)'
