@@ -18,8 +18,7 @@ steps:
 - task: UseDotNet@2
   displayName: 'Use dotnet sdk 3.x'
   inputs:
-    version: 3.0.100-preview8-013656
-    includePreviewVersions: true
+    version: 3.0.100
 
 - task: DotNetCoreCLI@2
   inputs:
