@@ -159,7 +159,7 @@ namespace Nanr.Api.Managers
             }
             else if (type == "mountain")
             {
-                price = 2200;
+                price = 2400;
                 amount = 100;
             }
             return (price, amount);

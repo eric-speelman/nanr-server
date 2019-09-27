@@ -52,6 +52,18 @@ namespace Nanr.Api.Managers
             return session;
         }
 
+        public async Task<bool> ConfirmEmail(Guid code)
+        {
+            var user = await context.Users.SingleOrDefaultAsync(x => x.EmailConfirmationCode == code);
+            if (user == null)
+            {
+                return false;
+            }
+            user.EmailConfirmationCode = null;
+            await context.SaveChangesAsync();
+            return true;
+        }
+
         public async Task SetResetCode(string email)
         {
             var user = await context.Users.Where(x => x.Email == email).SingleOrDefaultAsync();
@@ -116,7 +128,8 @@ namespace Nanr.Api.Managers
                 BackgroundColor = "#FAFAFA",
                 isStandTextDark = true,
                 ReferrerId = referrerId,
-                RefferrerRemainder = 0
+                RefferrerRemainder = 0,
+                EmailConfirmationCode = Guid.NewGuid()
             };
             var tag = new Tag
             {

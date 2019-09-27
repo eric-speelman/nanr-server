@@ -81,6 +81,7 @@ namespace Nanr.Api.Managers
             await transaction.CommitAsync();
 
             var tagOwner = tag.UserId;
+            response.Balance = user.Balance;
             response.TotalNanrCount = await context.Clicks.Where(x => x.UserId == userId && x.Tag.UserId == tagOwner).CountAsync();
             if (!string.IsNullOrWhiteSpace(clickModel.PageId))
             {

@@ -61,6 +61,13 @@ namespace Nanr.Api.Controllers
         }
 
         [HttpPost]
+        [Route("api/account/confirm-email")]
+        public async Task<bool> ConfirmEmail(ConfirmEmailModel model)
+        {
+            return await authManager.ConfirmEmail(model.Code);
+        }
+
+        [HttpPost]
         [Route("api/account/reset-password")]
         [AllowAnonymous]
         public async Task Reset([FromBody]ResetPasswordStartModel model)

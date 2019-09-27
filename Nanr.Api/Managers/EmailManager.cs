@@ -26,8 +26,8 @@ namespace Nanr.Api.Managers
 
         public async Task SendWelcome(User user)
         {
-            var body = "Welcome";
-            await SendEmail(user.Email, user.Username, "support@nanr.io", "Nanr Support", "Welcome to Nanr! Confirm Your Email", body);
+            var body = $"Welcome to Nanr. Please confirm Your Email https://app.nanr.io/account/confirm/{user.EmailConfirmationCode}";
+            await SendEmail(user.Email, user.Username, "support@nanr.io", "Nanr Support", "Welcome to Nanr!", body);
         }
 
         public async Task SendPurchase(User user, Purchase purchase)
@@ -46,6 +46,12 @@ namespace Nanr.Api.Managers
         {
             var text = "If you did not request a password reset please disregard this email.  To reset your password please navigate to https://app.nanr.io/account/reset/" + user.ResetCode;
             await SendEmail(user.Email, user.Username, "support@nanr.io", "Nanr Support", "Nanr Password Reset", text);
+        }
+
+        public async Task NanrReferral(User user, int amount)
+        {
+            var text = "One of your referee's has withdrawn Nanrs. As a result " + amount + " Nanrs have been added to your stash.";
+            await SendEmail(user.Email, user.Username, "support@nanr.io", "Nanr Support", "You got Nanrs!", text);
         }
 
         private readonly string sendGridKey;

@@ -12,32 +12,31 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Emails\**" />
     <Compile Remove="Pages\**" />
+    <Content Remove="Emails\**" />
     <Content Remove="Pages\**" />
+    <EmbeddedResource Remove="Emails\**" />
     <EmbeddedResource Remove="Pages\**" />
+    <None Remove="Emails\**" />
     <None Remove="Pages\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0-preview9.19423.6" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.0-preview9.19423.6">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.0.0-preview9.19423.4" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.0-preview9.19423.4" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0-preview9-19453-02" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
     <PackageReference Include="Sendgrid" Version="9.12.0" />
     <PackageReference Include="Square.Connect" Version="2.22.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Nanr.Data\Nanr.Data.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Emails\" />
-    <Folder Include="Views\" />
   </ItemGroup>
 
   <ItemGroup>
