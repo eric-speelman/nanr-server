@@ -96,7 +96,7 @@ namespace Nanr.Api.Managers
                 return purchaseResponse;
             } catch(Exception ex)
             {
-                var a = ex;
+                Console.WriteLine(ex);
                 return purchaseResponse;
             }
         }
