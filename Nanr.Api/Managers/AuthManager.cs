@@ -105,10 +105,6 @@ namespace Nanr.Api.Managers
             {
                 var username = signupModel.Referrer.Trim();
                 referrerId = context.Users.Where(x => x.Username == username).Select(x => x.Id).SingleOrDefault();
-                if (referrerId == Guid.Empty)
-                {
-                    errors.Add("referrer", "No one exists with that username");
-                }
             }
             if (errors.Any())
             {
